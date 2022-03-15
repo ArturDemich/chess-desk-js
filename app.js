@@ -89,3 +89,55 @@ function targetId(elem) {
        }
    })
  }
+
+
+
+
+const object = {
+    name: pawn,
+    color: black,
+    id: 'A1'
+
+}
+
+
+
+
+const chessman = document.querySelector('.chessman')
+const placeholders = document.querySelectorAll('.square')
+
+chessman.addEventListener('dragstart', dragstart)
+chessman.addEventListener('dragend', dragend)
+
+for (const placeholder of placeholders) {
+    placeholder.addEventListener('dragover', dragover)
+    placeholder.addEventListener('dragenter', dragenter)
+    placeholder.addEventListener('dragleave', dragleave)
+    placeholder.addEventListener('drop', dragdrop)
+}
+
+function dragstart(event) {
+    event.target.classList.add('hold')
+    setTimeout(() => event.target.classList.add('hide'),0)    
+}
+
+function dragend(event) {
+    event.target.className = 'chessman'    
+}
+
+function dragover(event) {
+    event.preventDefault()
+}
+
+function dragenter(event) {
+    event.target.classList.add('hovered')
+}
+
+function dragleave(event) {
+    event.target.classList.remove('hovered')
+}
+
+function dragdrop(event) {
+    event.target.classList.remove('hovered')
+    event.target.append(chessman)
+}

@@ -37,8 +37,7 @@
     flex-wrap: wrap;
     max-width: 100%;
     margin: 0;
-    text-align: center;
-    
+    text-align: center;    
     font-size: 25px;
     color: antiquewhite;
   }
@@ -73,7 +72,45 @@
     margin-top: 15px;
   }
 
-  .symbol-bottom {
+  .chessman{
+    width: 98px;
+    height: 98px;
+    border: 1px solid rgb(5, 0, 0);
+    box-shadow: 4px 4px 9px rgba(198, 198, 198, 0.36);
+    border-radius: 20px;
+    background: #f7f6f7;
+    padding: 0.8rem 1rem;
+    color: #828282;
+    text-align: center;
+    cursor: grab;
+    font-size: 30px;    
+  }
 
+  .chessman:active {
+    cursor: grabbing;
+  }
+  
+  .start {
+    background: linear-gradient(90deg, #ff85e4 0%, #229efd 179.25%);
+  }
+  
+  .progress {
+    background: linear-gradient(90deg, #209cff 0%, #68e0cf 100%);
+  }
+  
+  .done {
+    background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+  }
+  
+  .hold {
+    border: 5px solid #eee;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .hovered {
+    border: 3px solid #8eedd4;
   }
  
