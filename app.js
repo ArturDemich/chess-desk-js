@@ -3,6 +3,7 @@ const SQUARES_NUMBER = 100
 const symbol = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 const number = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8]
 let count = 0
+let countSquare = 0
 
 
 for (let i = 0; i < SQUARES_NUMBER; i++) {
@@ -18,9 +19,11 @@ for (let i = 0; i < SQUARES_NUMBER; i++) {
         square.classList.add('nook')
     } else if ( i == 10 || i == 19 || i == 20 || i == 29 || i == 30 || i == 39 || i == 40 || i == 49 || i == 50 || i == 59 || i == 60 || i == 69 || i == 70 || i == 79 || i == 80|| i == 89 ) {
         square.classList.add('number') 
-        target(square, count, number)
+        target(square, count, number)        
     } else {
-        square.classList.add('square')
+        square.classList.add('square')        
+        targetId(square)
+        countSquare++
     }
 
     
@@ -69,6 +72,20 @@ function target(elem, i, arr) {
     })
     if (count == arr.length) {
         count = 0 
-    }
-      
+    }      
 }
+
+function targetId(elem) {
+    const arr = []
+    for (let h = 0; h < number.length; h++) {
+        for (let i = 0; i < symbol.length; i++) {
+        arr.push(`${symbol[i] + number[h]}`)
+      } 
+    h++   
+   }
+   arr.forEach((element, index) => {
+       if (countSquare == index) {
+           elem.id = `${element}`
+       }
+   })
+ }
