@@ -2,6 +2,7 @@ const board = document.querySelector('#board')
 const SQUARES_NUMBER = 100
 const symbol = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 const number = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8]
+let arrId = []
 let count = 0
 let countSquare = 0
 
@@ -24,6 +25,7 @@ for (let i = 0; i < SQUARES_NUMBER; i++) {
         square.classList.add('square')        
         targetId(square)
         countSquare++
+        createChessman(square, i)
     }
 
     
@@ -44,7 +46,7 @@ for (let i = 0; i < SQUARES_NUMBER; i++) {
     } else if (i >= 81 && i < 88) {
         setColorTwo(square, i)
     } 
-   
+    
     board.append(square)
 }
 
@@ -87,27 +89,30 @@ function targetId(elem) {
        if (countSquare == index) {
            elem.id = `${element}`
        }
-   })
+   })   
  }
 
+function createChessman(elem, i) {
+    const div = document.createElement('div')
+    div.classList.add('chessman')
+    div.setAttribute('draggable', 'true')
 
-
-
-const object = {
-    name: pawn,
-    color: black,
-    id: 'A1'
-
+    if ( i <= 29 || i >= 71 ) {                    
+        elem.append(div)
+    }   
 }
 
 
 
 
-const chessman = document.querySelector('.chessman')
-const placeholders = document.querySelectorAll('.square')
 
-chessman.addEventListener('dragstart', dragstart)
-chessman.addEventListener('dragend', dragend)
+
+const chessman = document.querySelectorAll('.chessman')
+const placeholders = document.querySelectorAll('.square')
+let chessmanActive 
+
+chessman.forEach((elem) => {elem.addEventListener('dragstart', dragstart)}) 
+chessman.forEach((elem) => {elem.addEventListener('dragend', dragend)})
 
 for (const placeholder of placeholders) {
     placeholder.addEventListener('dragover', dragover)
@@ -118,11 +123,12 @@ for (const placeholder of placeholders) {
 
 function dragstart(event) {
     event.target.classList.add('hold')
-    setTimeout(() => event.target.classList.add('hide'),0)    
+    setTimeout(() => event.target.classList.add('hide'),0)   
+    chessmanActive = event.target 
 }
 
 function dragend(event) {
-    event.target.className = 'chessman'    
+    event.target.className = 'chessman'        
 }
 
 function dragover(event) {
@@ -139,5 +145,5 @@ function dragleave(event) {
 
 function dragdrop(event) {
     event.target.classList.remove('hovered')
-    event.target.append(chessman)
+    event.target.append(chessmanActive)
 }
